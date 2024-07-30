@@ -1,4 +1,4 @@
-import { Product } from "../../../models/Product.tsx";
+import { Product } from "../../../models/Product";
 
 export interface ProductsProps {
   url: string;

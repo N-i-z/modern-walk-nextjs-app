@@ -1,6 +1,6 @@
 import React from "react";
-import CategoryTile from "../../../components/atoms/CategoryTile/CategoryTile.component.tsx";
-import { Category } from "../../../../enums/category.ts";
+import CategoryTile from "../../../components/atoms/CategoryTile/CategoryTile.component";
+import { Category } from "../../../../enums/category";
 
 const Categories: React.FC = () => {
   return (

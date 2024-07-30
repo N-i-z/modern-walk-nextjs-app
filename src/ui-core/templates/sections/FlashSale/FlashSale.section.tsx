@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ProductCard from "../../../components/molecules/ProductCard/ProductCard.component.tsx";
-import Loading from "../../../components/atoms/Loading/Loading.component.tsx";
-import { Product } from "../../../../models/Product.tsx";
-import { Category } from "../../../../enums/category.ts";
+import ProductCard from "../../../components/molecules/ProductCard/ProductCard.component";
+import Loading from "../../../components/atoms/Loading/Loading.component";
+import { Product } from "../../../../models/Product";
+import { Category } from "../../../../enums/category";
 
 const FlashSale: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);

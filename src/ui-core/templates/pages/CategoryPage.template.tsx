@@ -1,9 +1,9 @@
 import React from "react";
-import ProductCard from "../../components/molecules/ProductCard/ProductCard.component.tsx";
-import Heading from "../../components/atoms/Typography/Heading.component.tsx";
-import useFetchProducts from "../../../hooks/useFetchProducts.ts";
-import Loading from "../../components/atoms/Loading/Loading.component.tsx";
-import { ProductListProps, ProductsProps } from "./template.types.tsx";
+import ProductCard from "../../components/molecules/ProductCard/ProductCard.component";
+import Heading from "../../components/atoms/Typography/Heading.component";
+import useFetchProducts from "../../../hooks/useFetchProducts";
+import Loading from "../../components/atoms/Loading/Loading.component";
+import { ProductListProps, ProductsProps } from "./template.types";
 
 export function WomensClothing() {
   return (

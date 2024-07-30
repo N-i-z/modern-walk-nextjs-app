@@ -1,4 +1,4 @@
-import { Category } from "../enums/category.ts";
+import { Category } from "../enums/category";
 
 export interface Product {
   id: string;

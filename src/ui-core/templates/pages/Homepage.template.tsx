@@ -1,7 +1,7 @@
 import React from "react";
-import FlashSale from "../sections/FlashSale/FlashSale.section.tsx";
-import Categories from "../sections/Categories/Categories.section.tsx";
-import Heading from "../../components/atoms/Typography/Heading.component.tsx";
+import FlashSale from "../sections/FlashSale/FlashSale.section";
+import Categories from "../sections/Categories/Categories.section";
+import Heading from "../../components/atoms/Typography/Heading.component";
 
 const Home: React.FC = () => {
   return (
