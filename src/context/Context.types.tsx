@@ -30,9 +30,3 @@ export interface CartContextProps {
   cartQuantity: number;
   clearCart: () => void;
 }
-
-export interface DrawerContextProps {
-  isDrawerOpen: boolean;
-  openDrawer: () => void;
-  closeDrawer: () => void;
-}

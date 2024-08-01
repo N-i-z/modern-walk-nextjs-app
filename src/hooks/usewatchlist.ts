@@ -1,3 +1,5 @@
+"use client"; // Mark this file as a client component
+
 import { useContext, useEffect, useState } from "react";
 import { WatchlistContext } from "../context/WatchListContext";
 import { useUser } from "@clerk/nextjs";

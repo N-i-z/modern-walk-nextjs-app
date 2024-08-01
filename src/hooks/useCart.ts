@@ -1,6 +1,8 @@
+"use client"; // Mark this file as a client component
+
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/CartContext";
-import { useUser } from "@clerk/clerk-react";
+import { useUser } from "@clerk/nextjs";
 import { CartItemProps } from "../context/Context.types";
 
 const useCart = (
@@ -24,6 +26,7 @@ const useCart = (
     increaseCartQuantity: (id: string) => {},
     decreaseCartQuantity: (id: string) => {},
   };
+
   const [isInCart, setIsInCart] = useState<boolean>(false);
   const { isSignedIn } = useUser();
 

@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { CartContext } from "../../../context/CartContext";
-import { Heading } from "../../components";
-import { FullCartItemCard } from "../../components";
-// import { ShoppingBag } from "lucide-react";
-import { Button } from "../../components/atoms/Button/button";
+import { CartContext } from "../context/CartContext";
+import { Heading, Loading } from "../ui-core/components";
+import { FullCartItemCard } from "../ui-core/components";
+import { Button } from "../ui-core/components/atoms/Button/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,10 +13,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../../components/molecules/AlertDialog/alert-dialog";
+} from "../ui-core/components/molecules/AlertDialog/alert-dialog";
 
 const FullCart: React.FC = () => {
-  const { cart, clearCart } = useContext(CartContext) || { cart: [] };
+  const context = useContext(CartContext);
+
+  if (!context) {
+    return <Loading />;
+  }
+
+  const { cart, clearCart } = context;
 
   const total = cart.reduce((accumulator, currentItem) => {
     return accumulator + currentItem.price * currentItem.quantity;
@@ -34,9 +39,8 @@ const FullCart: React.FC = () => {
         ) : (
           <div className="flex flex-col items-center w-full gap-6 mt-5">
             {cart.map((item) => (
-              <div className="w-full max-w-3xl">
+              <div key={item.id} className="w-full max-w-3xl">
                 <FullCartItemCard
-                  key={item.id}
                   id={item.id}
                   title={item.name}
                   image={item.image}
@@ -76,10 +80,7 @@ const FullCart: React.FC = () => {
             </AlertDialog>
           </div>
 
-          <Button variant="secondary">
-            {/* <ShoppingBag className="mr-2" /> */}
-            Checkout
-          </Button>
+          <Button variant="secondary">Checkout</Button>
         </div>
       )}
     </div>

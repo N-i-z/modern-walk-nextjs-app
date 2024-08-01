@@ -1,3 +1,5 @@
+"use client"; // Add this directive to indicate that this is a client component
+
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { CartItemProps, CartContextProps } from "./Context.types";

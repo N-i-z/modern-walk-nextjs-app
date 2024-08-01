@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@changesets/cli": "^2.27.5",
-    "@clerk/clerk-react": "^5.2.4",
     "@clerk/nextjs": "^5.2.8",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",

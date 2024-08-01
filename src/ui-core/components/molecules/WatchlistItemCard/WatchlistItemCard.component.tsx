@@ -13,8 +13,8 @@ const WatchlistItemCard: React.FC<WatchlistItemCardProps> = ({
   const { isInWatchlist, handleWatchlistToggle, isSignedIn } = useWatchlist(
     title, // itemId
     title, // itemName
-    price, // itemPrice
-    image // itemImage
+    price,
+    image
   );
 
   return (

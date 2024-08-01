@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { WatchlistContext } from "../../../context/WatchListContext";
-import { Heading } from "../../components";
-import { WatchlistItemCard } from "../../components";
+import { WatchlistContext } from "../context/WatchListContext";
+import { Heading } from "../ui-core/components";
+import { WatchlistItemCard } from "../ui-core/components";
 
 const Watchlist: React.FC = () => {
   const { watchlist } = useContext(WatchlistContext) || { watchlist: [] };

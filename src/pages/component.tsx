@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Heading } from "../../components";
-import { Button } from "../../components/atoms/Button/button";
-import { Input } from "../../components/atoms/Input/input";
+import { useState } from "react";
+import { Heading } from "../ui-core/components";
+import { Button } from "../ui-core/components/atoms/Button/button";
+import { Input } from "../ui-core/components/atoms/Input/input";
 import {
   RadioGroup,
   RadioGroupItem,
-} from "../../components/atoms/RadioGroup/radio-group";
-import { Checkbox } from "../../components/atoms/Checkbox/checkbox";
+} from "../ui-core/components/atoms/RadioGroup/radio-group";
+import { Checkbox } from "../ui-core/components/atoms/Checkbox/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,12 +15,14 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../../components/molecules/DropdownMenu/dropdown-menu";
+} from "../ui-core/components/molecules/DropdownMenu/dropdown-menu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
-import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
-import { cn } from "../../../lib/utils";
-import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
+import {
+  faAngleDown,
+  faAngleUp,
+  faEllipsisV,
+} from "@fortawesome/free-solid-svg-icons";
+import { cn } from "../lib/utils";
 import {
   Dialog,
   DialogContent,
@@ -30,11 +32,11 @@ import {
   DialogFooter,
   DialogTrigger,
   DialogClose,
-} from "../../components/molecules/Dialog/dialog";
+} from "../ui-core/components/molecules/Dialog/dialog";
 import {
   ScrollArea,
   ScrollBar,
-} from "../../components/atoms/ScrollArea/scroll-area";
+} from "../ui-core/components/atoms/ScrollArea/scroll-area";
 
 import {
   AlertDialog,
@@ -46,42 +48,57 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../../components/molecules/AlertDialog/alert-dialog";
+} from "../ui-core/components/molecules/AlertDialog/alert-dialog";
 import { z } from "zod";
 
-type Checked = DropdownMenuCheckboxItemProps["checked"];
-
 const Components: React.FC = () => {
-  const [isDDOpen, setIsDDOpen] = React.useState(false);
-  const [isVDOpen, setIsVDOpen] = React.useState(false);
-  const [isCBDDOpen, setCBDDOpen] = React.useState(false);
-  const [showOption1, setShowOption1] = React.useState<Checked>(true);
-  const [showOption2, setShowOption2] = React.useState<Checked>(false);
-  const [showDisabledOption, setShowDisabledOption] =
-    React.useState<Checked>(false);
-  const [isRBDDOpen, setRBDDOpen] = React.useState(false);
-  const [position, setPosition] = React.useState("bottom");
+  const [isDDOpen, setIsDDOpen] = useState(false);
+  const [isVDOpen, setIsVDOpen] = useState(false);
+  const [isCBDDOpen, setCBDDOpen] = useState(false);
+  const [showOption1, setShowOption1] = useState<boolean>(true);
+  const [showOption2, setShowOption2] = useState<boolean>(false);
+  const [showDisabledOption, setShowDisabledOption] = useState<boolean>(false);
+  const [isRBDDOpen, setRBDDOpen] = useState(false);
+  const [position, setPosition] = useState("bottom");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
   const emailSchema = z.string().email("Please enter a valid email address");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setEmail(value);
+    const { value, type, checked } = e.target;
 
-    try {
-      emailSchema.parse(value);
-      setError("");
-    } catch (err) {
-      if (err instanceof z.ZodError) {
-        setError(err.errors[0].message);
+    if (type === "checkbox") {
+      switch (value) {
+        case "option-one":
+          setShowOption1(checked);
+          break;
+        case "option-two":
+          setShowOption2(checked);
+          break;
+        case "disabled-option":
+          setShowDisabledOption(checked);
+          break;
+        default:
+          break;
+      }
+    } else if (type === "email") {
+      setEmail(value);
+
+      try {
+        emailSchema.parse(value);
+        setError("");
+      } catch (err) {
+        if (err instanceof z.ZodError) {
+          setError(err.errors[0].message);
+        }
       }
     }
   };
 
   return (
     <div className="mb-[10rem]">
+      {/* Buttons Section */}
       <div>
         <Heading variant="h2">Buttons</Heading>
         <div className="my-3 flex start ml-12">
@@ -102,6 +119,8 @@ const Components: React.FC = () => {
           </Button>
         </div>
       </div>
+
+      {/* Input Fields Section */}
       <div>
         <Heading variant="h2">Input Fields</Heading>
         <div>
@@ -127,39 +146,41 @@ const Components: React.FC = () => {
               className="ml-12 w-550px"
             />
             {error && (
-              <span className="flex start ml-12  text-sm text-dangerRed">
+              <span className="flex start ml-12 text-sm text-dangerRed">
                 {error}
               </span>
             )}
           </div>
         </div>
       </div>
+
+      {/* Radio Buttons Section */}
       <div>
         <Heading variant="h2">Radio buttons</Heading>
         <div className="flex start ml-12">
           <RadioGroup defaultChecked={false}>
-            <RadioGroupItem
-              disabled={true}
-              value="option-one"
-              id="option-one"
-            />
+            <RadioGroupItem disabled value="option-one" id="option-one" />
             <span className="ml-[-0.5rem] rounded-lg px-2 pt-1 pb-[6px] hover:bg-inverseHover">
               <RadioGroupItem value="option-two" id="option-two" />
             </span>
           </RadioGroup>
         </div>
       </div>
+
+      {/* Checkboxes Section */}
       <div>
         <Heading variant="h2">Checkboxes</Heading>
         <div className="flex flex-col items-start ml-12">
           <div>
-            <Checkbox disabled={true} />
+            <Checkbox disabled />
           </div>
           <div className="mt-3">
             <Checkbox />
           </div>
         </div>
       </div>
+
+      {/* Popup Dialog Section */}
       <div>
         <Heading variant="h2">Popup Dialog</Heading>
         <div className="flex start ml-12">
@@ -214,6 +235,8 @@ const Components: React.FC = () => {
           </Dialog>
         </div>
       </div>
+
+      {/* Popup Alert Dialog Section */}
       <div>
         <Heading variant="h2">Popup Alert Dialog</Heading>
         <div className="flex start ml-12">
@@ -237,6 +260,8 @@ const Components: React.FC = () => {
           </AlertDialog>
         </div>
       </div>
+
+      {/* Dropdown Menu Section */}
       <div>
         <Heading variant="h2">Dropdown Menu</Heading>
         <div className="flex start ml-12 mb-[6rem]">
@@ -253,19 +278,21 @@ const Components: React.FC = () => {
               <FontAwesomeIcon
                 icon={isDDOpen ? faAngleUp : faAngleDown}
                 className="ml-2"
-              ></FontAwesomeIcon>{" "}
+              />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem className="text-activeBorder ">
                 Delete Properties
               </DropdownMenuItem>
-              <DropdownMenuItem disabled={true} className="text-inactiveBorder">
+              <DropdownMenuItem disabled className="text-inactiveBorder">
                 Disabled Property
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </div>
+
+      {/* Vertical Ellipsis Dropdown Section */}
       <div>
         <Heading variant="h2">Vertical Ellipsis Dropdown</Heading>
         <div className="flex start ml-12 mb-[8rem]">
@@ -287,13 +314,15 @@ const Components: React.FC = () => {
               <DropdownMenuItem className="text-activeBorder ">
                 Delete
               </DropdownMenuItem>
-              <DropdownMenuItem disabled={true} className="text-inactiveBorder">
+              <DropdownMenuItem disabled className="text-inactiveBorder">
                 Disabled Property
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </div>
+
+      {/* Button with Checkbox Dropdown Section */}
       <div>
         <Heading variant="h2">Button with Checkbox Dropdown</Heading>
         <div className="flex start ml-12 mb-[9rem]">
@@ -312,7 +341,7 @@ const Components: React.FC = () => {
                 <FontAwesomeIcon
                   icon={isCBDDOpen ? faAngleUp : faAngleDown}
                   className="ml-2"
-                ></FontAwesomeIcon>
+                />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-56">
@@ -339,6 +368,8 @@ const Components: React.FC = () => {
           </DropdownMenu>
         </div>
       </div>
+
+      {/* Button with Radio Group Dropdown Section */}
       <div>
         <Heading variant="h2">Button with Radio Group Dropdown</Heading>
         <div className="flex start ml-12 mb-[9rem]">
@@ -346,7 +377,7 @@ const Components: React.FC = () => {
             <DropdownMenuTrigger
               asChild
               className={cn(
-                "p-3 hover:ring-0 outline-none  hover:shadow-boxHover ",
+                "p-3 hover:ring-0 outline-none hover:shadow-boxHover",
                 isRBDDOpen
                   ? "ring-selected text-selected active:shadow-boxSelected"
                   : " text-normal ring-normal shadow-boxNormal"
@@ -357,7 +388,7 @@ const Components: React.FC = () => {
                 <FontAwesomeIcon
                   icon={isRBDDOpen ? faAngleUp : faAngleDown}
                   className="ml-2"
-                ></FontAwesomeIcon>
+                />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-56">
@@ -369,7 +400,7 @@ const Components: React.FC = () => {
                 <DropdownMenuRadioItem value="bottom">
                   Bottom
                 </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="right" disabled={true}>
+                <DropdownMenuRadioItem value="right" disabled>
                   Right
                 </DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>

@@ -1,11 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/clerk-react";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { ShoppingCart, Eye, X, Expand } from "lucide-react";
 import { CartContext, useCart } from "../../../../context/CartContext";
 import {

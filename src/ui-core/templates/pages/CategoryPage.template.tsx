@@ -1,39 +1,10 @@
 import React from "react";
 import ProductCard from "../../components/molecules/ProductCard/ProductCard.component";
-import Heading from "../../components/atoms/Typography/Heading.component";
 import useFetchProducts from "../../../hooks/useFetchProducts";
 import Loading from "../../components/atoms/Loading/Loading.component";
 import { ProductListProps, ProductsProps } from "./template.types";
 
-export function WomensClothing() {
-  return (
-    <div className="content">
-      <div className="heading">
-        <Heading variant="h2">Women's Clothing</Heading>
-      </div>
-      <Products
-        url="https://fakestoreapi.com/products/category/women's clothing"
-        descriptionBackgroundColor="#FF5E84"
-      />
-    </div>
-  );
-}
-
-export function MensClothing() {
-  return (
-    <div className="content">
-      <div className="heading">
-        <Heading variant="h2">Men's Clothing</Heading>
-      </div>
-      <Products
-        url="https://fakestoreapi.com/products/category/men's clothing"
-        descriptionBackgroundColor="#2BD9AF"
-      />
-    </div>
-  );
-}
-
-const Products: React.FC<ProductsProps> = ({
+export const Products: React.FC<ProductsProps> = ({
   url,
   descriptionBackgroundColor,
 }) => {
@@ -53,7 +24,7 @@ const Products: React.FC<ProductsProps> = ({
   );
 };
 
-const ProductList: React.FC<ProductListProps> = ({
+export const ProductList: React.FC<ProductListProps> = ({
   products,
   descriptionBackgroundColor,
 }) => {
@@ -73,5 +44,3 @@ const ProductList: React.FC<ProductListProps> = ({
     </div>
   );
 };
-
-export default ProductList;
